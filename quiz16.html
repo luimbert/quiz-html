@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz de Cidades Ideais</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px auto;
+      max-width: 960px;
+      line-height: 1.5;
+    }
+    h1, h2, h3 {
+      text-align: center;
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    .question label {
+      display: block;
+      margin-bottom: 5px;
+      cursor: pointer;
+    }
+    button {
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 20px;
+    }
+    #result {
+      margin-top: 30px;
+      border: 1px solid #ccc;
+      padding: 20px;
+      display: none;
+      background-color: #f9f9f9;
+    }
+    #result h2 {
+      margin-top: 0;
+    }
+    .country-section {
+      margin-bottom: 30px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Quiz de Algumas Cidades Ideais para você Viver, nem que seja por uns tempos</h1>
+
+<form id="quizForm">
+
+  <!-- Pergunta 1: Clima -->
+  <div class="question">
+    <h3>1. Quais climas você prefere? (até 3)</h3>
+    <label><input type="checkbox" name="clima" value="tropical"> Tropical/quente</label>
+    <label><input type="checkbox" name="clima" value="temperado"> Temperado</label>
+    <label><input type="checkbox" name="clima" value="subtropical"> Subtropical</label>
+    <label><input type="checkbox" name="clima" value="frio"> Frio</label>
+    <label><input type="checkbox" name="clima" value="desertico"> Semiárido/Desértico</label>
+  </div>
+
+  <!-- Pergunta 2: O que você valoriza -->
+  <div class="question">
+    <h3>2. O que você mais valoriza? (até 3)</h3>
+    <label><input type="checkbox" name="qualidade" value="custo"> Custo de vida acessível</label>
+    <label><input type="checkbox" name="qualidade" value="lazer"> Lazer e cultura</label>
+    <label><input type="checkbox" name="qualidade" value="emprego"> Mercado de trabalho</label>
+    <label><input type="checkbox" name="qualidade" value="seguranca"> Segurança/tranquilidade</label>
+    <label><input type="checkbox" name="qualidade" value="gastronomia"> Gastronomia variada</label>
+    <label><input type="checkbox" name="qualidade" value="historico"> Patrimônio histórico/cultural</label>
+    <label><input type="checkbox" name="qualidade" value="praia"> Proximidade do mar/praia</label>
+  </div>
+
+  <!-- Pergunta 3: Infraestrutura -->
+  <div class="question">
+    <h3>3. Que infraestrutura é essencial? (até 3)</h3>
+    <label><input type="checkbox" name="infra" value="hospitais"> Hospitais de qualidade</label>
+    <label><input type="checkbox" name="infra" value="universidades"> Boas escolas/universidades</label>
+    <label><input type="checkbox" name="infra" value="transporte"> Transporte público eficiente</label>
+    <label><input type="checkbox" name="infra" value="ciclovias"> Ciclovias e parques</label>
+    <label><input type="checkbox" name="infra" value="tecnologia"> Ecossistema de tecnologia/inovação</label>
+    <label><input type="checkbox" name="infra" value="vidaNoturna"> Vida noturna</label>
+    <label><input type="checkbox" name="infra" value="comercio"> Comércio variado</label>
+  </div>
+
+  <!-- Pergunta 4: Temperamento -->
+  <div class="question">
+    <h3>4. Como você se descreve em termos de temperamento? (até 3)</h3>
+    <label><input type="checkbox" name="temperamento" value="calma"> Calma / tranquila</label>
+    <label><input type="checkbox" name="temperamento" value="agitada"> Agitada / intensa</label>
+    <label><input type="checkbox" name="temperamento" value="introvertida"> Introvertida</label>
+    <label><input type="checkbox" name="temperamento" value="extrovertida"> Extrovertida</label>
+    <label><input type="checkbox" name="temperamento" value="flexivel"> Flexível / equilibrada</label>
+  </div>
+
+  <!-- Pergunta 5: Tamanho de cidade -->
+  <div class="question">
+    <h3>5. Qual tamanho de cidade você prefere? (até 3)</h3>
+    <label><input type="checkbox" name="tamanho" value="pequena"> Pequena (~200k hab ou menos)</label>
+    <label><input type="checkbox" name="tamanho" value="media"> Média (200k - 1 milhão)</label>
+    <label><input type="checkbox" name="tamanho" value="grande"> Grande (mais de 1 milhão)</label>
+  </div>
+
+  <!-- Pergunta 6: Alimentação -->
+  <div class="question">
+    <h3>6. Quais estilos de comida você mais aprecia? (até 3)</h3>
+    <label><input type="checkbox" name="alimentacao" value="vegano"> Vegano/vegetariano</label>
+    <label><input type="checkbox" name="alimentacao" value="frutosMar"> Frutos do mar</label>
+    <label><input type="checkbox" name="alimentacao" value="carnes"> Carnes</label>
+    <label><input type="checkbox" name="alimentacao" value="massas"> Massas e pães</label>
+    <label><input type="checkbox" name="alimentacao" value="comidaAsiatica"> Comida asiática</label>
+  </div>
+
+  <!-- Pergunta 7: Sociabilidade -->
+  <div class="question">
+    <h3>7. Como você prefere fazer amizades? (até 3)</h3>
+    <label><input type="checkbox" name="social" value="amigosTantoFaz"> Tanto faz, sou flexível</label>
+    <label><input type="checkbox" name="social" value="amigosSim"> Gosto de conhecer gente nova</label>
+    <label><input type="checkbox" name="social" value="amigosNao"> Prefiro não fazer novos amigos</label>
+    <label><input type="checkbox" name="social" value="amigosPoucosBons"> Poucos e bons amigos</label>
+    <label><input type="checkbox" name="social" value="amigosMuitosFestejar"> Muitos amigos para festejar</label>
+  </div>
+
+  <button type="button" onclick="calcularResultado()">Ver resultado</button>
+</form>
+
+<div id="result">
+  <h2>Resultados</h2>
+  
+
+  <div class="country-section" id="brasilSection">
+    <h3>Brasil</h3>
+    <ul id="brasilList"></ul>
+  </div>
+  <div class="country-section" id="euaSection">
+    <h3>Estados Unidos</h3>
+    <ul id="euaList"></ul>
+  </div>
+  <div class="country-section" id="italiaSection">
+    <h3>Itália</h3>
+    <ul id="italiaList"></ul>
+  </div>
+  <div class="country-section" id="espanhaSection">
+    <h3>Espanha</h3>
+    <ul id="espanhaList"></ul>
+  </div>
+  <div class="country-section" id="portugalSection">
+    <h3>Portugal</h3>
+    <ul id="portugalList"></ul>
+  </div>
+  <div class="country-section" id="asiaSection">
+    <h3>Ásia</h3>
+    <ul id="asiaList"></ul>
+  </div>
+</div>
+
+<script>
+// EXEMPLO SIMPLES DE BASE DE DADOS
+const cidades = {
+  brasil: [
+    {
+      nome: "Petrópolis (RJ)",
+      tags: ["temperado","pequena","historico","massas","calma","seguranca"],
+      custo: "R$ 2.500 - R$ 3.500/mês (~30m² + alimentação)",
+      aluguel: "R$ 1.000 - R$ 1.500/mês"
+    },
+    {
+      nome: "Santos (SP)",
+      tags: ["tropical","praia","media","carnes","seguranca","calma"],
+      custo: "R$ 3.000 - R$ 4.000/mês (~30m² + alimentação)",
+      aluguel: "R$ 1.500 - R$ 2.300/mês"
+    },
+    {
+      nome: "Juiz de Fora (MG)",
+      tags: ["subtropical","media","carnes","historico","seguranca","calma"],
+      custo: "R$ 2.500 - R$ 3.500/mês (~30m² + alimentação)",
+      aluguel: "R$ 1.000 - R$ 1.600/mês"
+    }
+  ],
+  eua: [
+    {
+      nome: "Miami (Flórida)",
+      tags: ["tropical","praia","grande","frutosMar","agitada","vidaNoturna"],
+      custo: "US$ 2.700 - US$ 3.700/mês (~30m² + alimentação)",
+      aluguel: "US$ 1.500 - US$ 2.000/mês"
+    },
+    {
+      nome: "New York (NY)",
+      tags: ["temperado","grande","emprego","massas","agitada","vidaNoturna"],
+      custo: "US$ 3.500 - US$ 5.000/mês (~30m² + alimentação)",
+      aluguel: "US$ 2.000 - US$ 3.500/mês"
+    },
+    {
+      nome: "Orlando (Flórida)",
+      tags: ["tropical","media","lazer","frutosMar","calma"],
+      custo: "US$ 2.000 - US$ 2.800/mês (~30m² + alimentação)",
+      aluguel: "US$ 1.100 - US$ 1.700/mês"
+    }
+  ],
+  italia: [
+    {
+      nome: "Roma",
+      tags: ["temperado","grande","historico","agitada","massas","vidaNoturna"],
+      custo: "€ 1.500 - € 2.000/mês (~30m² + alimentação)",
+      aluguel: "€ 800 - € 1.400/mês"
+    },
+    {
+      nome: "Trieste",
+      tags: ["temperado","media","historico","massas","seguranca","calma"],
+      custo: "€ 1.000 - € 1.400/mês (~30m² + alimentação)",
+      aluguel: "€ 500 - € 800/mês"
+    },
+    {
+      nome: "Ilhas Eólicas (Sicília)",
+      tags: ["tropical","pequena","praia","frutosMar","calma","historico"],
+      custo: "€ 800 - € 1.100/mês (~30m² + alimentação)",
+      aluguel: "€ 400 - € 650/mês"
+    }
+  ],
+  espanha: [
+    {
+      nome: "Barcelona",
+      tags: ["temperado","grande","praia","comidaAsiatica","agitada","vidaNoturna"],
+      custo: "€ 1.400 - € 1.900/mês (~30m² + alimentação)",
+      aluguel: "€ 700 - € 1.300/mês"
+    },
+    {
+      nome: "Madri",
+      tags: ["temperado","grande","emprego","massas","historico"],
+      custo: "€ 1.500 - € 2.000/mês (~30m² + alimentação)",
+      aluguel: "€ 800 - € 1.500/mês"
+    },
+    {
+      nome: "Valência",
+      tags: ["tropical","media","praia","frutosMar"],
+      custo: "€ 1.000 - € 1.300/mês (~30m² + alimentação)",
+      aluguel: "€ 500 - € 800/mês"
+    }
+  ],
+  portugal: [
+    {
+      nome: "Lisboa",
+      tags: ["temperado","grande","emprego","massas","vidaNoturna","agitada"],
+      custo: "€ 1.300 - € 1.800/mês (~30m² + alimentação)",
+      aluguel: "€ 700 - € 1.200/mês"
+    },
+    {
+      nome: "Coimbra",
+      tags: ["temperado","pequena","universidades","massas","calma","historico"],
+      custo: "€ 800 - € 1.100/mês (~30m² + alimentação)",
+      aluguel: "€ 400 - € 650/mês"
+    },
+    {
+      nome: "Porto",
+      tags: ["temperado","media","historico","massas","introvertida","seguranca"],
+      custo: "€ 1.000 - € 1.400/mês (~30m² + alimentação)",
+      aluguel: "€ 500 - € 900/mês"
+    }
+  ],
+  asia: [
+    {
+      nome: "Tóquio (Japão)",
+      tags: ["temperado","grande","comidaAsiatica","agitada","tecnologia","emprego"],
+      custo: "¥ 180.000 - ¥ 250.000/mês (~30m² + alimentação)",
+      aluguel: "¥ 80.000 - ¥ 120.000/mês"
+    },
+    {
+      nome: "Bali (Indonésia)",
+      tags: ["tropical","pequena","praia","calma","frutosMar"],
+      custo: "US$ 600 - US$ 1000/mês (~30m² + alimentação)",
+      aluguel: "US$ 300 - US$ 600/mês"
+    },
+    {
+      nome: "Seul (Coreia do Sul)",
+      tags: ["frio","grande","emprego","agitada","comidaAsiatica","vidaNoturna"],
+      custo: "₩ 1.5M - ₩ 2.5M/mês (~30m² + alimentação)",
+      aluguel: "₩ 700k - ₩ 1.2M/mês"
+    }
+  ]
+};
+
+/*
+1) Coletamos as tags do usuário.
+2) Se a pessoa escolheu SOMENTE "praia" (e NADA mais), então filtramos estritamente cidades com "praia". Nada de fallback.
+3) Caso contrário, voltamos à soma de pontos (≥2) + fallback.
+*/
+
+function calcularResultado() {
+  const climas       = getCheckedValues("clima");
+  const qualidades   = getCheckedValues("qualidade");
+  const infra        = getCheckedValues("infra");
+  const temperamento = getCheckedValues("temperamento");
+  const tamanho      = getCheckedValues("tamanho");
+  const alimentacao  = getCheckedValues("alimentacao");
+  const social       = getCheckedValues("social");
+
+  // Verificar se cada pergunta tem no máximo 3 seleções
+  const allAnswers = [climas, qualidades, infra, temperamento, tamanho, alimentacao, social];
+  if (allAnswers.some(arr => arr.length > 3)) {
+    alert("Por favor, selecione no máximo 3 opções em cada pergunta.");
+    return;
+  }
+
+  // Juntar tudo em userTags
+  const userTags = [...climas, ...qualidades, ...infra, ...temperamento, ...tamanho, ...alimentacao, ...social];
+
+  // **Verificamos** se userTags.length === 1 E userTags.includes("praia")
+  if (userTags.length === 1 && userTags.includes("praia")) {
+    // LÓGICA ESPECIAL: SOMENTE CIDADES QUE TENHAM "praia"
+    // Exibimos APENAS cidades com "praia". Sem fallback.
+    const resultadoBrasil   = filtrarSoPraia(cidades.brasil);
+    const resultadoEUA      = filtrarSoPraia(cidades.eua);
+    const resultadoItalia   = filtrarSoPraia(cidades.italia);
+    const resultadoEspanha  = filtrarSoPraia(cidades.espanha);
+    const resultadoPortugal = filtrarSoPraia(cidades.portugal);
+    const resultadoAsia     = filtrarSoPraia(cidades.asia);
+
+    mostrarCidadesSoPraia("brasilList",   resultadoBrasil);
+    mostrarCidadesSoPraia("euaList",      resultadoEUA);
+    mostrarCidadesSoPraia("italiaList",   resultadoItalia);
+    mostrarCidadesSoPraia("espanhaList",  resultadoEspanha);
+    mostrarCidadesSoPraia("portugalList", resultadoPortugal);
+    mostrarCidadesSoPraia("asiaList",     resultadoAsia);
+
+  } else {
+    // CASO GERAL: soma de pontos (≥2) + fallback
+    const resultadoBrasil   = filtrarPontuacao(cidades.brasil,   climas, qualidades, infra, temperamento, tamanho, alimentacao, social);
+    const resultadoEUA      = filtrarPontuacao(cidades.eua,      climas, qualidades, infra, temperamento, tamanho, alimentacao, social);
+    const resultadoItalia   = filtrarPontuacao(cidades.italia,   climas, qualidades, infra, temperamento, tamanho, alimentacao, social);
+    const resultadoEspanha  = filtrarPontuacao(cidades.espanha,  climas, qualidades, infra, temperamento, tamanho, alimentacao, social);
+    const resultadoPortugal = filtrarPontuacao(cidades.portugal, climas, qualidades, infra, temperamento, tamanho, alimentacao, social);
+    const resultadoAsia     = filtrarPontuacao(cidades.asia,     climas, qualidades, infra, temperamento, tamanho, alimentacao, social);
+
+    mostrarCidadesFallback("brasilList",   resultadoBrasil,   cidades.brasil);
+    mostrarCidadesFallback("euaList",      resultadoEUA,      cidades.eua);
+    mostrarCidadesFallback("italiaList",   resultadoItalia,   cidades.italia);
+    mostrarCidadesFallback("espanhaList",  resultadoEspanha,  cidades.espanha);
+    mostrarCidadesFallback("portugalList", resultadoPortugal, cidades.portugal);
+    mostrarCidadesFallback("asiaList",     resultadoAsia,     cidades.asia);
+  }
+
+  document.getElementById("result").style.display = "block";
+}
+
+// Filtra apenas cidades que tenham a tag "praia"
+function filtrarSoPraia(listaCidades) {
+  return listaCidades.filter(c => c.tags.includes("praia"));
+}
+
+function mostrarCidadesSoPraia(listId, arrayCidades) {
+  const ul = document.getElementById(listId);
+  ul.innerHTML = "";
+  if (arrayCidades.length === 0) {
+    ul.innerHTML = "<li>Nenhuma cidade com 'praia' encontrada.</li>";
+  } else {
+    arrayCidades.forEach(cidade => {
+      const li = document.createElement("li");
+      li.textContent = `${cidade.nome} — Custo: ${cidade.custo}; Aluguel: ${cidade.aluguel}`;
+      ul.appendChild(li);
+    });
+  }
+}
+
+// ---------------------------------------------------
+// LÓGICA GERAL DE PONTUAÇÃO (≥2) + Fallback
+// ---------------------------------------------------
+function filtrarPontuacao(lista, climas, qualidades, infra, temperamento, tamanho, alimentacao, social) {
+  const cidadesPontuadas = lista.map(cidade => {
+    let pontuacao = 0;
+    climas.forEach(t => { if (cidade.tags.includes(t)) pontuacao++; });
+    qualidades.forEach(t => { if (cidade.tags.includes(t)) pontuacao++; });
+    infra.forEach(t => { if (cidade.tags.includes(t)) pontuacao++; });
+    temperamento.forEach(t => { if (cidade.tags.includes(t)) pontuacao++; });
+    tamanho.forEach(t => { if (cidade.tags.includes(t)) pontuacao++; });
+    alimentacao.forEach(t => { if (cidade.tags.includes(t)) pontuacao++; });
+    social.forEach(t => { if (cidade.tags.includes(t)) pontuacao++; });
+
+    return {
+      nome: cidade.nome,
+      pontuacao,
+      custo: cidade.custo,
+      aluguel: cidade.aluguel
+    };
+  });
+
+  let filtradas = cidadesPontuadas.filter(c => c.pontuacao >= 2);
+  // Ordenar do maior p/ menor pontuacao
+  filtradas.sort((a,b) => b.pontuacao - a.pontuacao);
+
+  return filtradas;
+}
+
+function mostrarCidadesFallback(listId, arrayCidades, listaCompleta) {
+  const ul = document.getElementById(listId);
+  ul.innerHTML = "";
+
+  if (arrayCidades.length >= 3) {
+    // Exibe no máximo 5
+    const top5 = arrayCidades.slice(0, 5);
+    top5.forEach(cidade => {
+      const li = document.createElement("li");
+      li.textContent = `${cidade.nome} — Custo: ${cidade.custo}; Aluguel: ${cidade.aluguel}`;
+      ul.appendChild(li);
+    });
+  } else {
+    // Se <3 resultados, fallback com 3 cidades (pelos melhores matches ou IDH fictício).
+    // Aqui, sem qvScore, podemos exibir as que têm maior pontuacao ou algo fixo.
+    // Vou exibir as top 3 pela pontuacao ou, se zero, as 3 primeiras da listaCompleta.
+    if (arrayCidades.length === 0) {
+      // Pega as 3 primeiras ou alguma lógica. Exemplo:
+      const top3 = listaCompleta.slice(0, 3);
+      top3.forEach(city => {
+        const li = document.createElement("li");
+        li.textContent = `${city.nome} — Custo: ${city.custo}; Aluguel: ${city.aluguel} (fallback)`;
+        ul.appendChild(li);
+      });
+    } else if (arrayCidades.length === 1 || arrayCidades.length === 2) {
+      // Exibir as 1 ou 2 encontradas
+      arrayCidades.forEach(city => {
+        const li = document.createElement("li");
+        li.textContent = `${city.nome} — Custo: ${city.custo}; Aluguel: ${city.aluguel}`;
+        ul.appendChild(li);
+      });
+      // E completar para ter no total 3
+      const nomesJaListados = arrayCidades.map(x => x.nome);
+      const fallbackCount = 3 - arrayCidades.length;
+      let fallback = listaCompleta.filter(c => !nomesJaListados.includes(c.nome));
+      fallback = fallback.slice(0, fallbackCount);
+      fallback.forEach(f => {
+        const li2 = document.createElement("li");
+        li2.textContent = `${f.nome} — Custo: ${f.custo}; Aluguel: ${f.aluguel} (fallback)`;
+        ul.appendChild(li2);
+      });
+    }
+  }
+}
+
+// Captura as checkboxes marcadas
+function getCheckedValues(name) {
+  const checkboxes = document.querySelectorAll(`input[name="${name}"]:checked`);
+  return Array.from(checkboxes).map(cb => cb.value);
+}
+</script>
+
+</body>
+</html>
